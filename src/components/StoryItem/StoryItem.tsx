@@ -1,7 +1,10 @@
 export type Story = {
   id: number;
   title: string;
-  url: string;
+  url?: string;
+  score: number;
+  descendants: number;
+  time: number;
 };
 
 const backgroundColours = [
@@ -18,9 +21,10 @@ const backgroundColours = [
 ];
 
 export function StoryItem({ story }: { story: Story }) {
+  const hnLink = `https://news.ycombinator.com/item?id=${story.id}`;
   const colourIndex = story.id % 10;
   return (
-    <a href={story.url} target="_blank">
+    <a href={story.url ?? hnLink} target="_blank">
       <div
         className={`mb-6 px-8 py-4 text-lg font-semibold
           ${backgroundColours[colourIndex]} border-4 border-black
