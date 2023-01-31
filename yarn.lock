@@ -387,6 +387,11 @@ electron-to-chromium@^1.4.284:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.284.tgz#61046d1e4cab3a25238f6bf7413795270f125592"
   integrity sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==
 
+epoch-timeago@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/epoch-timeago/-/epoch-timeago-1.1.9.tgz#bbbcccdba585ead38e1dae0e757f545bea303191"
+  integrity sha512-yzU3tG9YfvlImtgWjQM753F8+VRHFfUge2Bs++DNOEu5dzK2mX+lRBXSWUQEKGBi4b7WNJHIlQVuCmvp24j14A==
+
 esbuild@^0.16.3:
   version "0.16.17"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.16.17.tgz#fc2c3914c57ee750635fee71b89f615f25065259"

@@ -1,3 +1,5 @@
+import timeago from "epoch-timeago";
+
 export type Story = {
   id: number;
   title: string;
@@ -26,12 +28,13 @@ export function StoryItem({ story }: { story: Story }) {
   return (
     <a href={story.url ?? hnLink} target="_blank">
       <div
-        className={`mb-6 px-8 py-4 text-lg font-semibold
+        className={`mb-6 px-8 py-4
           ${backgroundColours[colourIndex]} border-4 border-black
           hover:rotate-3 hover:scale-105 transition-all`}
         key={story.id}
       >
-        {story.title}
+        <div className="text-xl font-bold">{story.title}</div>
+        <div className="text-m">{timeago(story.time * 1000)}</div>
       </div>
     </a>
   );
