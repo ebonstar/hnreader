@@ -7,7 +7,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="max-w-screen-lg mx-auto px-4 flex flex-col gap-8">
+      <div className="max-w-screen-lg h-full mx-auto px-4 flex flex-col gap-8">
         <Header />
         <StoryList />
       </div>

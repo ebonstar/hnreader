@@ -3,6 +3,7 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import Masonry from "react-masonry-css";
 
+import { Loader } from "components/Loader";
 import { Story, StoryItem } from "components/StoryItem";
 import { fetchStory, fetchTopStoryIds } from "data/story";
 
@@ -50,9 +51,11 @@ export function StoryList() {
   }, [inView]);
 
   return (
-    <div>
+    <>
       {status === "loading" ? (
-        <p>Loading...</p>
+        <div className="grow flex justify-center">
+          <Loader />
+        </div>
       ) : status === "error" ? (
         <span>Error: {(error as Error).message}</span>
       ) : (
@@ -68,20 +71,11 @@ export function StoryList() {
                 chunk.map((story) => <StoryItem story={story} />)
               )}
           </Masonry>
-          <div
-            ref={ref}
-            style={{
-              height: "100px",
-            }}
-          >
-            {isFetchingNextPage
-              ? "Loading more..."
-              : hasNextPage
-              ? "Load Newer"
-              : "Nothing more to load"}
+          <div ref={ref} className="h-40 mb-8">
+            {isFetchingNextPage ? <Loader /> : "Nothing more to load"}
           </div>
         </>
       )}
-    </div>
+    </>
   );
 }
