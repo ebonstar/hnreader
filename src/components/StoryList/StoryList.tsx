@@ -16,33 +16,27 @@ export function StoryList() {
   const { data: storyIds } = useQuery<number[]>(["ids"], fetchTopStoryIds);
   const limitedStoryIds = storyIds?.slice(0, STORY_LIMIT);
 
-  const {
-    status,
-    data,
-    error,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useInfiniteQuery<Story[]>(
-    ["stories"],
-    async ({ pageParam = 0 }) => {
-      const idsToFetch = limitedStoryIds!.slice(
-        pageParam,
-        pageParam + CHUNK_SIZE
-      );
-      const data = await Promise.all(idsToFetch.map(fetchStory));
-      return data;
-    },
-    {
-      enabled: !!limitedStoryIds,
-      getNextPageParam: (_, pages) => {
-        const totalStories = pages.flat().length;
-        return limitedStoryIds!.length > totalStories
-          ? totalStories
-          : undefined;
+  const { status, data, error, isFetchingNextPage, fetchNextPage } =
+    useInfiniteQuery<Story[]>(
+      ["stories"],
+      async ({ pageParam = 0 }) => {
+        const idsToFetch = limitedStoryIds!.slice(
+          pageParam,
+          pageParam + CHUNK_SIZE
+        );
+        const data = await Promise.all(idsToFetch.map(fetchStory));
+        return data;
       },
-    }
-  );
+      {
+        enabled: !!limitedStoryIds,
+        getNextPageParam: (_, pages) => {
+          const totalStories = pages.flat().length;
+          return limitedStoryIds!.length > totalStories
+            ? totalStories
+            : undefined;
+        },
+      }
+    );
 
   React.useEffect(() => {
     if (inView) {
@@ -71,8 +65,17 @@ export function StoryList() {
                 chunk.map((story) => <StoryItem story={story} />)
               )}
           </Masonry>
-          <div ref={ref} className="h-40 mb-8">
-            {isFetchingNextPage ? <Loader /> : "Nothing more to load"}
+          <div
+            ref={ref}
+            className="h-48 shrink-0 flex justify-center items-center"
+          >
+            {isFetchingNextPage ? (
+              <Loader />
+            ) : (
+              <div className="text-3xl font-bold">
+                (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ You've reached the end!
+              </div>
+            )}
           </div>
         </>
       )}
