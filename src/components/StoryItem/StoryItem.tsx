@@ -22,17 +22,25 @@ const backgroundColours = [
   "bg-emerald-300",
 ];
 
+const topPositions = ["top-1", "top-3"];
+
 export function StoryItem({ story }: { story: Story }) {
   const hnLink = `https://news.ycombinator.com/item?id=${story.id}`;
-  const colourIndex = story.id % 10;
+  const background = backgroundColours[story.id % 10];
+  const top = topPositions[story.score % 2];
   return (
     <a href={story.url ?? hnLink} target="_blank">
       <div
         className={`group relative mb-6 px-8 py-4
-          ${backgroundColours[colourIndex]} border-4 border-black
+          ${background} border-4 border-black
           hover:rotate-3 hover:scale-105 transition-all`}
         key={story.id}
       >
+        <div
+          className={`absolute ${top} -left-6 px-1 ${background} font-bold border-4 border-black`}
+        >
+          {story.score}
+        </div>
         <div className="text-xl font-bold">{story.title}</div>
         <div className="text-m">{timeago(story.time * 1000)}</div>
         <a
