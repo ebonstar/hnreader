@@ -28,13 +28,20 @@ export function StoryItem({ story }: { story: Story }) {
   return (
     <a href={story.url ?? hnLink} target="_blank">
       <div
-        className={`mb-6 px-8 py-4
+        className={`group relative mb-6 px-8 py-4
           ${backgroundColours[colourIndex]} border-4 border-black
           hover:rotate-3 hover:scale-105 transition-all`}
         key={story.id}
       >
         <div className="text-xl font-bold">{story.title}</div>
         <div className="text-m">{timeago(story.time * 1000)}</div>
+        <a
+          className="absolute hidden -bottom-2 -right-2 px-4 py-2 bg-black text-white hover:underline group-hover:block"
+          href={hnLink}
+          target="_blank"
+        >
+          {story.descendants} comments
+        </a>
       </div>
     </a>
   );
