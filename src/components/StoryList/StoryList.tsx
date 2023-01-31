@@ -10,6 +10,12 @@ import { fetchStory, fetchTopStoryIds } from "data/story";
 const STORY_LIMIT = 100;
 const CHUNK_SIZE = 15;
 
+const masonryColumnBreakpoints = {
+  default: 3,
+  1024: 2,
+  640: 1,
+};
+
 export function StoryList() {
   const { ref, inView } = useInView();
 
@@ -55,7 +61,7 @@ export function StoryList() {
       ) : (
         <>
           <Masonry
-            breakpointCols={3}
+            breakpointCols={masonryColumnBreakpoints}
             className="flex -ml-12 w-auto"
             columnClassName="pl-12"
           >
