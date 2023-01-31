@@ -56,8 +56,8 @@ export function StoryList() {
         <>
           <Masonry
             breakpointCols={3}
-            className="flex -ml-8 w-auto"
-            columnClassName="pl-8"
+            className="flex -ml-12 w-auto"
+            columnClassName="pl-12"
           >
             {data &&
               data.pages &&

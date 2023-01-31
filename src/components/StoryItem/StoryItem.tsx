@@ -24,16 +24,20 @@ const backgroundColours = [
 
 const topPositions = ["top-1", "top-3"];
 
+const scales = ["", "scale-110", "scale-125"];
+
 export function StoryItem({ story }: { story: Story }) {
   const hnLink = `https://news.ycombinator.com/item?id=${story.id}`;
   const background = backgroundColours[story.id % 10];
   const top = topPositions[story.score % 2];
+  const scale =
+    story.score > 300 ? scales[2] : story.score > 150 ? scales[1] : scales[0];
   return (
     <a href={story.url ?? hnLink} target="_blank">
       <div
         className={`group relative mb-6 px-8 py-4
-          ${background} border-4 border-black
-          hover:rotate-3 hover:scale-105 transition-all`}
+          ${background} border-4 border-black ${scale}
+          hover:rotate-3 hover:z-10 transition-all`}
         key={story.id}
       >
         <div
