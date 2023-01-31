@@ -1,37 +1,18 @@
 import React from "react";
-import { useInView } from "react-intersection-observer";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
 import Masonry from "react-masonry-css";
+import { StoryItem } from "../StoryItem";
+import { fetchStory, fetchTopStoryIds } from "../../data/story";
 
-type Story = {
-  id: number;
-  title: string;
-  url: string;
-};
+const STORY_LIMIT = 100;
+const CHUNK_SIZE = 15;
 
-const fetchStory = async (id: number): Promise<Story> => {
-  const res = await fetch(
-    `https://hacker-news.firebaseio.com/v0/item/${id}.json`
-  );
-  if (!res.ok) throw new Error("Could not load story");
-  return res.json();
-};
-
-const limit = 100;
-const chunk = 15;
-
-export function StoriesList() {
+export function StoryList() {
   const { ref, inView } = useInView();
 
-  const { data: storyIds } = useQuery<number[]>(["ids"], async () => {
-    const res = await fetch(
-      "https://hacker-news.firebaseio.com/v0/topstories.json"
-    );
-    if (!res.ok) throw new Error("Could not load stories");
-    return res.json();
-  });
-
-  const limitedStoryIds = storyIds?.slice(0, limit);
+  const { data: storyIds } = useQuery<number[]>(["ids"], fetchTopStoryIds);
+  const limitedStoryIds = storyIds?.slice(0, STORY_LIMIT);
 
   const {
     status,
@@ -43,7 +24,10 @@ export function StoriesList() {
   } = useInfiniteQuery(
     ["stories"],
     async ({ pageParam = 0 }) => {
-      const idsToFetch = limitedStoryIds!.slice(pageParam, pageParam + chunk);
+      const idsToFetch = limitedStoryIds!.slice(
+        pageParam,
+        pageParam + CHUNK_SIZE
+      );
       const data = await Promise.all(idsToFetch.map(fetchStory));
       return data;
     },
@@ -80,19 +64,7 @@ export function StoriesList() {
             {data &&
               data.pages &&
               data.pages.map((chunk) =>
-                chunk.map((story) => (
-                  <div
-                    style={{
-                      border: "1px solid gray",
-                      borderRadius: "5px",
-                      padding: "1rem 2rem",
-                      background: `hsla(${story.id * 30}, 60%, 80%, 1)`,
-                    }}
-                    key={story.id}
-                  >
-                    {story.title}
-                  </div>
-                ))
+                chunk.map((story) => <StoryItem story={story} />)
               )}
           </Masonry>
           <div
