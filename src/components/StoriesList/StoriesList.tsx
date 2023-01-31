@@ -1,6 +1,7 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import Masonry from "react-masonry-css";
 
 type Story = {
   id: number;
@@ -36,7 +37,6 @@ export function StoriesList() {
     status,
     data,
     error,
-    isFetching,
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
@@ -72,12 +72,16 @@ export function StoriesList() {
         <span>Error: {(error as Error).message}</span>
       ) : (
         <>
-          <ol>
+          <Masonry
+            breakpointCols={3}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
             {data &&
               data.pages &&
               data.pages.map((chunk) =>
                 chunk.map((story) => (
-                  <li
+                  <div
                     style={{
                       border: "1px solid gray",
                       borderRadius: "5px",
@@ -87,27 +91,21 @@ export function StoriesList() {
                     key={story.id}
                   >
                     {story.title}
-                  </li>
+                  </div>
                 ))
               )}
-          </ol>
-          <div>
-            <button
-              ref={ref}
-              onClick={() => fetchNextPage()}
-              disabled={!hasNextPage || isFetchingNextPage}
-            >
-              {isFetchingNextPage
-                ? "Loading more..."
-                : hasNextPage
-                ? "Load Newer"
-                : "Nothing more to load"}
-            </button>
-          </div>
-          <div>
-            {isFetching && !isFetchingNextPage
-              ? "Background Updating..."
-              : null}
+          </Masonry>
+          <div
+            ref={ref}
+            style={{
+              height: "100px",
+            }}
+          >
+            {isFetchingNextPage
+              ? "Loading more..."
+              : hasNextPage
+              ? "Load Newer"
+              : "Nothing more to load"}
           </div>
         </>
       )}
