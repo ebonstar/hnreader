@@ -4,6 +4,9 @@ import { rest } from "msw";
 import topstories from "./topstories.json";
 
 export const handlers = [
+  rest.get(API_URL + "test.json", (_, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ test: true }));
+  }),
   rest.get(API_URL + "topstories.json", (_, res, ctx) => {
     return res(ctx.status(200), ctx.json(topstories));
   }),
