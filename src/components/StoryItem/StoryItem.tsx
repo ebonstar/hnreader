@@ -49,7 +49,7 @@ export function StoryItem({ story }: { story: Story }) {
         <div className="text-xl font-bold">{story.title}</div>
         <div className="text-m">{timeago(story.time * 1000)}</div>
         <a
-          className={`${extraInfoClasses} -bottom-2 -right-2 px-4 py-2 hover:underline`}
+          className={`${extraInfoClasses} -bottom-6 -right-2 px-4 py-1 hover:underline`}
           href={hnLink}
           target="_blank"
         >
