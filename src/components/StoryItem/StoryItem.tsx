@@ -26,6 +26,9 @@ const topPositions = ["top-1", "top-3"];
 
 const scales = ["", "scale-110", "scale-125"];
 
+const extraInfoClasses =
+  "absolute hidden group-hover:block bg-black text-white";
+
 export function StoryItem({ story }: { story: Story }) {
   const hnLink = `https://news.ycombinator.com/item?id=${story.id}`;
   const background = backgroundColours[story.id % 10];
@@ -40,15 +43,13 @@ export function StoryItem({ story }: { story: Story }) {
           hover:rotate-3 hover:z-10 transition-all`}
         key={story.id}
       >
-        <div
-          className={`absolute ${top} -left-6 px-1 ${background} font-bold border-4 border-black`}
-        >
-          {story.score}
+        <div className={`${extraInfoClasses} ${top} -left-12 p-2 font-bold`}>
+          ⇧ {story.score}
         </div>
         <div className="text-xl font-bold">{story.title}</div>
         <div className="text-m">{timeago(story.time * 1000)}</div>
         <a
-          className="absolute hidden -bottom-2 -right-2 px-4 py-2 bg-black text-white hover:underline group-hover:block"
+          className={`${extraInfoClasses} -bottom-2 -right-2 px-4 py-2 hover:underline`}
           href={hnLink}
           target="_blank"
         >
