@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { StoryList } from "./components/StoryList";
+import { StoryList } from "components/StoryList";
 
 const queryClient = new QueryClient();
 

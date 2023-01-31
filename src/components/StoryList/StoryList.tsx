@@ -2,8 +2,9 @@ import React from "react";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import Masonry from "react-masonry-css";
-import { StoryItem } from "../StoryItem";
-import { fetchStory, fetchTopStoryIds } from "../../data/story";
+
+import { Story, StoryItem } from "components/StoryItem";
+import { fetchStory, fetchTopStoryIds } from "data/story";
 
 const STORY_LIMIT = 100;
 const CHUNK_SIZE = 15;
@@ -21,7 +22,7 @@ export function StoryList() {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteQuery(
+  } = useInfiniteQuery<Story[]>(
     ["stories"],
     async ({ pageParam = 0 }) => {
       const idsToFetch = limitedStoryIds!.slice(

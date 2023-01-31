@@ -1,4 +1,4 @@
-import { Story } from "../components/StoryItem";
+import { Story } from "components/StoryItem";
 import { fetchUrl } from "./api";
 
 export const fetchTopStoryIds = async () => {
