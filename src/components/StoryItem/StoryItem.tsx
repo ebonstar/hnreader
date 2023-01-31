@@ -13,6 +13,7 @@ export function StoryItem({ story }: { story: Story }) {
         padding: "1rem 2rem",
         background: `hsla(${story.id * 30}, 60%, 80%, 1)`,
       }}
+      className="mb-8"
       key={story.id}
     >
       {story.title}

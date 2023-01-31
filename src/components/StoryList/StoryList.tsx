@@ -59,8 +59,8 @@ export function StoryList() {
         <>
           <Masonry
             breakpointCols={3}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
+            className="flex -ml-8 w-auto"
+            columnClassName="pl-8"
           >
             {data &&
               data.pages &&
