@@ -1,4 +1,3 @@
-import { expect, test } from "vitest";
 import topstories from "mocks/topstories.json";
 import { fetchStory, fetchTopStoryIds } from "./story";
 
