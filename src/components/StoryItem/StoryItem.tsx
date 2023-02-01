@@ -1,5 +1,7 @@
 import timeago from "epoch-timeago";
 
+export const HN_ITEM_LINK = "https://news.ycombinator.com/item?id=";
+
 export type Story = {
   id: number;
   title: string;
@@ -29,7 +31,7 @@ const extraInfoClasses =
   "absolute hidden group-hover:block bg-black text-white";
 
 export function StoryItem({ story }: { story: Story }) {
-  const hnLink = `https://news.ycombinator.com/item?id=${story.id}`;
+  const hnLink = HN_ITEM_LINK + story.id;
   const background = backgroundColours[story.id % 7];
   const rotate = rotateLevels[story.id % 4];
   const top = topPositions[story.score % 3];
