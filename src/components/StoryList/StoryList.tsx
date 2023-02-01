@@ -16,6 +16,18 @@ const masonryColumnBreakpoints = {
   640: 1,
 };
 
+/**
+ * Get the next chunk of items from an array, given a start index and chunk size
+ * @param array Array of items to extract from
+ * @param start Start index for the next chunk
+ * @param chunk Number of items in each chunk
+ */
+export const getNextChunk = <T,>(
+  array: T[],
+  start: number,
+  chunk: number
+): T[] => array.slice(start, start + chunk);
+
 export function StoryList() {
   const { ref, inView } = useInView();
 
@@ -26,9 +38,10 @@ export function StoryList() {
     useInfiniteQuery<Story[]>(
       ["stories"],
       async ({ pageParam = 0 }) => {
-        const idsToFetch = limitedStoryIds!.slice(
+        const idsToFetch = getNextChunk(
+          limitedStoryIds!,
           pageParam,
-          pageParam + CHUNK_SIZE
+          CHUNK_SIZE
         );
         const data = await Promise.all(idsToFetch.map(fetchStory));
         return data;
