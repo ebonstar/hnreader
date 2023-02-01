@@ -70,20 +70,23 @@ export function StoryList() {
       ) : status === "error" ? (
         <span>Error: {(error as Error).message}</span>
       ) : (
-        <ol>
-          <Masonry
-            breakpointCols={masonryColumnBreakpoints}
-            className="flex -ml-12 w-auto"
-            columnClassName="pl-12"
-          >
-            {data &&
-              data.pages &&
-              data.pages.map((chunk) =>
-                chunk.map((story) => <StoryItem story={story} />)
-              )}
-          </Masonry>
+        <>
+          <ol>
+            <Masonry
+              breakpointCols={masonryColumnBreakpoints}
+              className="flex -ml-12 w-auto"
+              columnClassName="pl-12"
+            >
+              {data &&
+                data.pages &&
+                data.pages.map((chunk) =>
+                  chunk.map((story) => <StoryItem story={story} />)
+                )}
+            </Masonry>
+          </ol>
           <div
             ref={ref}
+            id="load-more"
             className="h-48 shrink-0 flex justify-center items-center"
           >
             {isFetchingNextPage ? (
@@ -94,7 +97,7 @@ export function StoryList() {
               </div>
             )}
           </div>
-        </ol>
+        </>
       )}
     </>
   );
