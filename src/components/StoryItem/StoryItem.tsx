@@ -10,12 +10,9 @@ export type Story = {
 };
 
 const backgroundColours = [
-  "bg-yellow-300",
-  "bg-yellow-300",
-  "bg-lime-300",
   "bg-lime-300",
   "bg-teal-300",
-  "bg-cyan-300",
+  "bg-yellow-300",
   "bg-cyan-300",
   "bg-stone-200",
   "bg-rose-400",
@@ -31,7 +28,7 @@ const extraInfoClasses =
 
 export function StoryItem({ story }: { story: Story }) {
   const hnLink = `https://news.ycombinator.com/item?id=${story.id}`;
-  const background = backgroundColours[story.id % 10];
+  const background = backgroundColours[story.id % 7];
   const top = topPositions[story.score % 3];
   const scale =
     story.score > 300 ? scales[2] : story.score > 150 ? scales[1] : scales[0];
