@@ -8,7 +8,10 @@ const classes = [
 
 export function Loader() {
   return (
-    <div className="mx-auto py-8 flex items-center justify-center">
+    <div
+      className="mx-auto py-8 flex items-center justify-center"
+      role="status"
+    >
       <div className={classes.join(" ")} />
     </div>
   );
