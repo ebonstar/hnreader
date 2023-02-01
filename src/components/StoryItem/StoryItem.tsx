@@ -54,7 +54,8 @@ export function StoryItem({ story }: { story: Story }) {
         href={hnLink}
         target="_blank"
       >
-        {story.descendants} comments
+        {story.descendants ?? 0}{" "}
+        {story.descendants === 1 ? " comment" : "comments"}
       </a>
     </div>
   );
