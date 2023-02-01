@@ -36,26 +36,26 @@ export function StoryItem({ story }: { story: Story }) {
   const scale =
     story.score > 300 ? scales[2] : story.score > 150 ? scales[1] : scales[0];
   return (
-    <a href={story.url ?? hnLink} target="_blank">
-      <div
-        className={`group relative mb-6 px-8 py-4
+    <div
+      className={`group relative mb-6 px-8 py-4
           ${background} border-4 border-black ${scale}
           hover:rotate-3 hover:z-10 transition-all`}
-        key={story.id}
-      >
-        <div className={`${extraInfoClasses} ${top} -left-12 p-2 font-bold`}>
-          ⇧ {story.score}
-        </div>
+      key={story.id}
+    >
+      <div className={`${extraInfoClasses} ${top} -left-12 p-2 font-bold`}>
+        ⇧ {story.score}
+      </div>
+      <a href={story.url ?? hnLink} target="_blank">
         <div className="text-xl font-bold">{story.title}</div>
         <div className="text-m">{timeago(story.time * 1000)}</div>
-        <a
-          className={`${extraInfoClasses} -bottom-6 -right-2 px-4 py-1 hover:underline`}
-          href={hnLink}
-          target="_blank"
-        >
-          {story.descendants} comments
-        </a>
-      </div>
-    </a>
+      </a>
+      <a
+        className={`${extraInfoClasses} -bottom-6 -right-2 px-4 py-1 hover:underline`}
+        href={hnLink}
+        target="_blank"
+      >
+        {story.descendants} comments
+      </a>
+    </div>
   );
 }
