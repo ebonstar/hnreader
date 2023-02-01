@@ -3,12 +3,10 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import Masonry from "react-masonry-css";
 
+import { CHUNK_SIZE, STORY_LIMIT } from "config";
 import { Loader } from "components/Loader";
 import { Story, StoryItem } from "components/StoryItem";
 import { fetchStory, fetchTopStoryIds } from "data/story";
-
-const STORY_LIMIT = 100;
-const CHUNK_SIZE = 15;
 
 const masonryColumnBreakpoints = {
   default: 3,
@@ -72,7 +70,7 @@ export function StoryList() {
       ) : status === "error" ? (
         <span>Error: {(error as Error).message}</span>
       ) : (
-        <>
+        <ol>
           <Masonry
             breakpointCols={masonryColumnBreakpoints}
             className="flex -ml-12 w-auto"
@@ -96,7 +94,7 @@ export function StoryList() {
               </div>
             )}
           </div>
-        </>
+        </ol>
       )}
     </>
   );

@@ -1,6 +1,5 @@
 import timeago from "epoch-timeago";
-
-export const HN_ITEM_LINK = "https://news.ycombinator.com/item?id=";
+import { HN_ITEM_URL } from "config";
 
 export type Story = {
   id: number;
@@ -31,14 +30,14 @@ const extraInfoClasses =
   "absolute hidden group-hover:block bg-black text-white";
 
 export function StoryItem({ story }: { story: Story }) {
-  const hnLink = HN_ITEM_LINK + story.id;
+  const hnLink = HN_ITEM_URL + story.id;
   const background = backgroundColours[story.id % 7];
   const rotate = rotateLevels[story.id % 4];
   const top = topPositions[story.score % 3];
   const scale =
     story.score > 300 ? scales[2] : story.score > 150 ? scales[1] : scales[0];
   return (
-    <div
+    <li
       className={`group relative mb-6 px-8 py-4
         ${background} border-4 border-black ${scale} ${rotate}
         hover:rotate-0 hover:z-10 transition-all`}
@@ -59,6 +58,6 @@ export function StoryItem({ story }: { story: Story }) {
         {story.descendants ?? 0}{" "}
         {story.descendants === 1 ? " comment" : "comments"}
       </a>
-    </div>
+    </li>
   );
 }

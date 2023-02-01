@@ -1,4 +1,4 @@
-export const API_URL = "https://hacker-news.firebaseio.com/v0/";
+import { API_URL } from "config";
 
 export const fetchUrl = async <T>(endpoint: string): Promise<T> => {
   const url = API_URL + endpoint;

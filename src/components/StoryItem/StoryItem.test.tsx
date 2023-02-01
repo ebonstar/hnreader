@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { HN_ITEM_LINK, StoryItem } from "./StoryItem";
 import story from "mocks/item.json";
+import { HN_ITEM_URL } from "config";
+import { StoryItem } from "./StoryItem";
 
 test("storyItem matches snapshot", () => {
   const storyItem = render(<StoryItem story={story} />);
@@ -15,5 +16,5 @@ test("story with no external url links to hacker news page", () => {
     name: /story title/,
   });
 
-  expect(storyLink.href).toContain(HN_ITEM_LINK);
+  expect(storyLink.href).toContain(HN_ITEM_URL);
 });

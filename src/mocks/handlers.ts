@@ -1,5 +1,5 @@
-import { API_URL } from "data/api";
 import { rest } from "msw";
+import { API_URL } from "config";
 
 import topstories from "./topstories.json";
 import item from "./item.json";
