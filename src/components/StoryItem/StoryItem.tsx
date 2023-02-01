@@ -19,6 +19,8 @@ const backgroundColours = [
   "bg-emerald-300",
 ];
 
+const rotateLevels = ["rotate-3", "rotate-1", "-rotate-2", "-rotate-1"];
+
 const topPositions = ["top-3", "top-6", "top-12"];
 
 const scales = ["", "scale-110", "scale-125"];
@@ -29,14 +31,15 @@ const extraInfoClasses =
 export function StoryItem({ story }: { story: Story }) {
   const hnLink = `https://news.ycombinator.com/item?id=${story.id}`;
   const background = backgroundColours[story.id % 7];
+  const rotate = rotateLevels[story.id % 4];
   const top = topPositions[story.score % 3];
   const scale =
     story.score > 300 ? scales[2] : story.score > 150 ? scales[1] : scales[0];
   return (
     <div
       className={`group relative mb-6 px-8 py-4
-          ${background} border-4 border-black ${scale}
-          hover:rotate-3 hover:z-10 transition-all`}
+        ${background} border-4 border-black ${scale} ${rotate}
+        hover:rotate-0 hover:z-10 transition-all`}
       key={story.id}
     >
       <div className={`${extraInfoClasses} ${top} -left-12 p-2 font-bold`}>
