@@ -22,7 +22,7 @@ const backgroundColours = [
   "bg-emerald-300",
 ];
 
-const topPositions = ["top-1", "top-3"];
+const topPositions = ["top-3", "top-6", "top-12"];
 
 const scales = ["", "scale-110", "scale-125"];
 
@@ -32,7 +32,7 @@ const extraInfoClasses =
 export function StoryItem({ story }: { story: Story }) {
   const hnLink = `https://news.ycombinator.com/item?id=${story.id}`;
   const background = backgroundColours[story.id % 10];
-  const top = topPositions[story.score % 2];
+  const top = topPositions[story.score % 3];
   const scale =
     story.score > 300 ? scales[2] : story.score > 150 ? scales[1] : scales[0];
   return (
