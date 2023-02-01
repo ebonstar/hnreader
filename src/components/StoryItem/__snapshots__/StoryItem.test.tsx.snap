@@ -5,7 +5,7 @@ exports[`storyItem matches snapshot 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
+      <li
         class="group relative mb-6 px-8 py-4
         bg-lime-300 border-4 border-black scale-110 rotate-3
         hover:rotate-0 hover:z-10 transition-all"
@@ -40,11 +40,11 @@ exports[`storyItem matches snapshot 1`] = `
            
           comments
         </a>
-      </div>
+      </li>
     </div>
   </body>,
   "container": <div>
-    <div
+    <li
       class="group relative mb-6 px-8 py-4
         bg-lime-300 border-4 border-black scale-110 rotate-3
         hover:rotate-0 hover:z-10 transition-all"
@@ -79,7 +79,7 @@ exports[`storyItem matches snapshot 1`] = `
          
         comments
       </a>
-    </div>
+    </li>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
