@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  font-family: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman,
+  font-family: Iowan Old Style, Apple Garamond, Baskerville, Georgia,
     Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol;
 }
